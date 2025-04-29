@@ -1,9 +1,5 @@
 # Detection of depressive symptomatology in social networks
 
-**Universidad Carlos III de Madrid**
-
-<img src='http://www.tsc.uc3m.es/~navia/figures/logo_uc3m_foot.jpg' width=400 />
-
 ## Authors:
 * **Jhonatan Barcos Gambaro (100548615)**
 * **Andrés Díaz Ruano (100472763)**
