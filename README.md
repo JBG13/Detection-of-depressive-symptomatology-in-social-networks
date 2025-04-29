@@ -1,1 +1,0 @@
-# Detection-of-depressive-symptomatology-in-social-networks
