@@ -73,6 +73,37 @@ Finally, we print a visualization with Word Cloud, which is attached below. We c
 
 We can observe how words like “feel”, “think”, “hug”, “life”, ‘want’ and “know”.  This is coherent because they reflect an introspective and emotional tone, which have a great weight at a psychological level.
 
+### 1.2.2. Word2vec/Glove based representation
+Next, we will perform a scan with pre-trained and locally trained embeddings to capture the semantic relationships between words in our corpus based on Reddit posts. For this purpose, we have chosen the 100-dimensional Word2Vec and GloVe6B representations.
+
+Regarding the Word2Vec model, we have trained it on our corpus using gensim.models.Word2Vec with the following parameters:
+vector_size=100
+window=5
+min_count=5 
+workers=4
+sg=1 
+Thus, once we have trained the model, each document has been represented as the average of the vectors of its words, which is equivalent to the average of embeddings.
+
+Respecto al modelo GloVe, hemos utilizado unos embeddings preentrenados, exactamente los glove.6B.100d.txt, el cual hemos descargado a través de la página oficial de GloVe. Al igual que con Word2Vec, este modelo calcula el vector de cada documento como el promedio de los vectores de sus palabras.
+
+In the following, we will explain in a theoretical-mathematical way how these models carry out the conversion from words to vectors in each of the documents. First of all, the input of these models is a tokenized text d = [t1, t2, t3, ..., tn] (detailed in previous points), while the embeddings model E(ti) = R^100. Thus we can define the representation of a document as:
+doc = 1/n SUM_i=1_n(E(ti))
+
+Through this representation technique we preserve the semantic meaning of the texts and we are able to generate dense 100-dimensional representations.  
+
+To conclude this section, we have performed a 2 dimensions PCA analysis to check which is the best model for vector adaptation of the informal language inherent in our Reddit corpus. The different visualizations are attached below. 
+
+2D PCA Visualization of Word2Vec Document Vectors:
+
+<img width="553" alt="word" src="https://github.com/user-attachments/assets/e813bf7c-937e-49ea-b5b3-74c7a9ef91eb" />
+
+2D PCA Visualization of Glove Document Vectors:
+
+<img width="548" alt="glove" src="https://github.com/user-attachments/assets/16ae264d-9ee4-4613-8ce2-c7e9ec728a1e" />
+
+
+Through an exhaustive analysis of the results, we observe how the Word2Vec model is able to explain 17.35% of PC1 and 8.28% of PC2, while the GloVe model is able to explain 14.77% and 8.01% of the variance of our vectorized data. Thus, the Word2Vec model is able to explain 14.77% and 8.01% of the variance of our vectorized data.
+
 
 
 
