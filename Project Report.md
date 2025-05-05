@@ -115,6 +115,10 @@ In order to maximize the efficiency of this method we used an iterative techniqu
 We have then evaluated each of the models using semantic coherence as a criterion through gensim.models.CoherenceModel and we have concluded that the best value for our algorithm is k=10 as it has obtained the highest coherence. Thus, each document is transformed into a 10-dimensional vector where each component represents the probability of belonging to a topic. Finally, we store the best model for later use in classification models.
 
 
+Below is an image with the list of the most relevant words of each topic as well as the general interpretation of each topic for the correct understanding of the classification.
+
+![topics_word_table_colored_header_big](https://github.com/user-attachments/assets/049ab3a4-77fb-4e18-8ba8-db070a2db74d)
+
 # 2. Machine Learning. Classification using feature extraction or selection techniques
 
 
@@ -123,5 +127,7 @@ We have then evaluated each of the models using semantic coherence as a criterio
 
 
 # Acknowledgment of authorship
+
+
 
 
