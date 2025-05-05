@@ -44,6 +44,20 @@ Our goal is to explore how different representations capture the emotional and s
 
 # 1. Natural Language Processing, Topic Modeling and Document Vectorization
 ## 1.1. Preprocessing Pipeline
+In this section, we will define the preprocessing carried out on our dataset to adapt it in the best possible way to our project. As a previous step to make the corresponding code, we have made a detailed analysis of the language of our dataset, which we have to take into account that it comes from social network posts, so we find an informal language, with spelling mistakes and/or abbreviations due to the inherent language of social networks. This initial analysis has been key to perform an optimal preprocessing pipeline for our practice.
+
+Below, we detail the preprocessing performed with the aim of cleaning and normalizing the text of our dataset to increase the quality of its representation and subsequent modeling:
+
+First, we have made the concatenation of the title and body of the messages in a single text string for each of the posts. Then, we have casted the text to lowercase, thus reducing the sparsity of the vocabulary. On the other hand, one of the difficulties we have encountered due to the nature of the social networking language is the presence of HTML tags, URLs and user mentions, so we have removed them using regex. Once this initial preprocessing was done, we used the en_core_web_md model to tokenize the vocabulary.
+
+Then, the lemmatization of each token was performed, followed by a final filtering based on the elimination of the following elements:
+* Punctuation marks
+* Special characters
+* Stopwords (coming from SpaCy modified to adapt it to our practice)
+* Tokens smaller than 3 characters.
+  
+Once this preprocessing was done, each document was represented as a clean list of lemmatized tokens prepared for vectorization, which is detailed below.
+
 ## 1.2. Document Vectorization Methods
 ## 1.3. Topic Modeling with LDA
 
