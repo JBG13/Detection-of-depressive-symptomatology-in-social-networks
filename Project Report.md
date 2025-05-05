@@ -102,6 +102,7 @@ To conclude this section, we have performed a 2 dimensions PCA analysis to check
 
 <img width="548" alt="glove" src="https://github.com/user-attachments/assets/16ae264d-9ee4-4613-8ce2-c7e9ec728a1e" />
 
+Through an exhaustive analysis of the results, we observe how the Word2Vec model is able to explain 17.35% of PC1 and 8.28% of PC2, while the GloVe model is able to explain 14.77% and 8.01% of the variance of our vectorized data. Thus, the Word2Vec model is able to explain 14.77% and 8.01% of the variance of our vectorized data.
 
 ### 1.2.3. Extraction of themes and vector representation of the documents using the LDA algorithm
 Through an exhaustive analysis of the results, we observe how the Word2Vec model is able to explain 17.35% of PC1 and 8.28% of PC2, while the GloVe model is able to explain 14.77% and 8.01% of the variance of our vectorized data. Thus, the Word2Vec model is able to explain 14.77% and 8.01% of the variance of our vectorized data.
