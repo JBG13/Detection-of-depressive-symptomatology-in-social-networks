@@ -42,14 +42,16 @@ Each entry in the dataset contains the following fields:
 
 Our goal is to explore how different representations capture the emotional and semantic structure of the posts, and assess their usefulness in downstream tasks such as classification or visualization.
 
-# Task 1. Natural Language Processing, Topic Modeling and Document Vectorization
+# 1. Natural Language Processing, Topic Modeling and Document Vectorization
+## 1.1. Preprocessing Pipeline
+## 1.2. Document Vectorization Methods
+## 1.3. Topic Modeling with LDA
+
+# 2. Machine Learning. Classification using feature extraction or selection techniques
 
 
-# Task 2. Machine Learning. Classification using feature extraction or selection techniques
 
-
-
-# Task 3. Implementation of a dashboard using the Python Dash library
+# 3. Implementation of a dashboard using the Python Dash library
 
 
 # Acknowledgment of authorship
