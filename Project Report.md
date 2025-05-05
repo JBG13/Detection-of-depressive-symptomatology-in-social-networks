@@ -58,8 +58,23 @@ Then, the lemmatization of each token was performed, followed by a final filteri
   
 Once this preprocessing was done, each document was represented as a clean list of lemmatized tokens prepared for vectorization, which is detailed below.
 
-## 1.2. Document Vectorization Methods
-## 1.3. Topic Modeling with LDA
+## 1.2. Text Vectorization
+En el siguiente apartado describiremos todas las estrategias que hemos escogido e implementado en nuestro proyecto con el objetivo de representar los textos a través de vectores numéricos para su posterior utilización en el análisis de temas y tareas de clasificación.
+
+
+### 1.2.1. TF-IDF representation
+First of all, we have used a TF-IDF (Term Frequency-Inverse Document Frequency) representation, a technique based on the weighting of terms according to their frequency in the occurrence of a document versus their frequency within the corpus. This feature is the key reason why we have decided to choose this representation over BoW, since with TF-IDF we achieve a key semantic discrimination for our project, since if we had used BoW, very common words in social networks would pose a problem for the subsequent binary classification.
+
+To carry out its implementation we have used TfidfVectorizer from scikit-learn, using as input the preprocessed texts detailed above. Likewise, we have considered unigrams and bigrams, limiting to 5,000 features to avoid model confusion and maximize accuracy. We also normalized the vectors to provide stability in the new data for later use as input to classification models.
+
+Finally, we print a visualization with Word Cloud, which is attached below. We can observe a word cloud where those terms that have a higher weight in our representation appear.
+
+<img width="399" alt="Captura de pantalla 2025-05-05 191116" src="https://github.com/user-attachments/assets/5b710e9d-8fad-49fe-a7b7-1236d89f6f0c" />
+
+We can observe how words like “feel”, “think”, “hug”, “life”, ‘want’ and “know”.  This is coherent because they reflect an introspective and emotional tone, which have a great weight at a psychological level.
+
+
+
 
 # 2. Machine Learning. Classification using feature extraction or selection techniques
 
