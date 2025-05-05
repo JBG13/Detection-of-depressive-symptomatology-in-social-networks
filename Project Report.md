@@ -101,10 +101,18 @@ To conclude this section, we have performed a 2 dimensions PCA analysis to check
 
 <img width="548" alt="glove" src="https://github.com/user-attachments/assets/16ae264d-9ee4-4613-8ce2-c7e9ec728a1e" />
 
-
+### 1.2.3. Extraction of themes and vector representation of the documents using the LDA algorithm
 Through an exhaustive analysis of the results, we observe how the Word2Vec model is able to explain 17.35% of PC1 and 8.28% of PC2, while the GloVe model is able to explain 14.77% and 8.01% of the variance of our vectorized data. Thus, the Word2Vec model is able to explain 14.77% and 8.01% of the variance of our vectorized data.
 
 
+To conclude this section we will describe the topic extraction and vector representation of the documents through the LDA algorithm, implemented with gensim. The main goal of this method is to model latent topics and extract common discourse patterns among the main topics of our corpus. To carry out such implementation we have limited the tokens according to their frequency, eliminating tokens with a very high or low relative frequency (in case they appear in less than 5 or more than 80% of documents). This ensures that all tokens provide relevant information to the model while improving its performance. A bag of words was then created through doc2bow from the dictionary.
+
+In order to maximize the efficiency of this method we used an iterative technique to select the optimal number of topics for the LDA algorithm according to our project. For this purpose, we have trained LDA models with the following k parameters:
+* start = 5
+* limit = 30
+* step = 5
+  
+We have then evaluated each of the models using semantic coherence as a criterion through gensim.models.CoherenceModel and we have concluded that the best value for our algorithm is k=10 as it has obtained the highest coherence. Thus, each document is transformed into a 10-dimensional vector where each component represents the probability of belonging to a topic. Finally, we store the best model for later use in classification models.
 
 
 # 2. Machine Learning. Classification using feature extraction or selection techniques
