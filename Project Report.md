@@ -132,20 +132,20 @@ To finalize the project, an interactive dashboard has been implemented where the
 In order to facilitate the use of this tool, all the modules that have been implemented dynamically are detailed below:
 
 ## 3.1. Section A: Analysis and exploration at the topic level (Modules 1-4
-Module 1: Distribution of documents by topic. 
+### Module 1: Distribution of documents by topic 
 In this module we can observe a bar chart representing the number of posts in our Reddit corpus that fall into each topic according to the results of our best LDA configuration. This way we can see which are the most relevant topics in our dataset.
 
-Module 2: Key words for the selected topic
+### Module 2: Key words for the selected topic
 Next, after the selection of a certain dominant topic, the most relevant words of that topic are displayed to favor the semantic understanding of the topic and thus favor the clarity of the subsequent analysis of that topic.
 
-Module 3: Distribution of tags for the selected topic
+### Module 3: Distribution of tags for the selected topic
 Next, we visualize a comparison between the distribution of tags (control vs. depression) for the selected topic. This helps us to determine which topics have a higher correlation with depressive symptomatology, which together with the previous module will constitute an essential part of the project analysis.
 
-Module 4: 2D Document Projection (PCA)
+### Module 4: 2D Document Projection (PCA)
 To conclude this section, we have made a scatter plot using principal component analysis in 2D space. Thus, we allow the user to visualize the separation between the 2 different classes using embeddings.
 
-##3.2. Section B: Exhaustive comparison of different models (Module 5)
-Module 5: Exhaustive Comparison: Model, Vectorizer & Feature Selection
+## 3.2. Section B: Exhaustive comparison of different models (Module 5)
+### Module 5: Exhaustive Comparison: Model, Vectorizer & Feature Selection
 In this section we will perform an exhaustive and interactive analysis where the user will be able to select the different parameters to visualize the results of a given combination of parameters for each of the models and even compare them with other combinations of parameters. Thus the user will be able to filter the results by:
 * Evaluation Metric
 * Filter by Model
