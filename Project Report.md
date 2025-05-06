@@ -131,7 +131,7 @@ To finalize the project, an interactive dashboard has been implemented where the
 
 In order to facilitate the use of this tool, all the modules that have been implemented dynamically are detailed below:
 
-## 3.1. Section A: Analysis and exploration at the topic level (Modules 1-4
+## 3.1. Section A: Analysis and exploration at the topic level (Modules 1-4)
 ### Module 1: Distribution of documents by topic 
 In this module we can observe a bar chart representing the number of posts in our Reddit corpus that fall into each topic according to the results of our best LDA configuration. This way we can see which are the most relevant topics in our dataset.
 
