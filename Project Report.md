@@ -123,7 +123,7 @@ Below is an image with the list of the most relevant words of each topic as well
 
 
 
-# Task 3. Dashboard for the Detection of Depressive Symptomatology in Social Networks
+# 3. Dashboard for the Detection of Depressive Symptomatology in Social Networks
 To finalize the project, an interactive dashboard has been implemented where the user can check the final results of the main project notebook and make an exhaustive comparison of the results obtained according to the combination of the different classification and vectorization models implemented, which have been detailed in the previous points.
 
 In order to facilitate the use of this tool, all the modules that have been implemented dynamically are detailed below:
