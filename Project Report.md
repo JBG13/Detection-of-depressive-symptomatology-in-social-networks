@@ -93,13 +93,10 @@ Through this representation technique we preserve the semantic meaning of the te
 
 To conclude this section, we have performed a 2 dimensions PCA analysis to check which is the best model for vector adaptation of the informal language inherent in our Reddit corpus. The different visualizations are attached below. 
 
-2D PCA Visualization of Word2Vec Document Vectors:
-
+#### 2D PCA Visualization of Word2Vec Document Vectors:
 <img width="553" alt="word" src="https://github.com/user-attachments/assets/e813bf7c-937e-49ea-b5b3-74c7a9ef91eb" />
 
-
-2D PCA Visualization of Glove Document Vectors:
-
+#### 2D PCA Visualization of Glove Document Vectors:
 <img width="548" alt="glove" src="https://github.com/user-attachments/assets/16ae264d-9ee4-4613-8ce2-c7e9ec728a1e" />
 
 Through an exhaustive analysis of the results, we observe how the Word2Vec model is able to explain 17.35% of PC1 and 8.28% of PC2, while the GloVe model is able to explain 14.77% and 8.01% of the variance of our vectorized data. Thus, the Word2Vec model is able to explain 14.77% and 8.01% of the variance of our vectorized data.
