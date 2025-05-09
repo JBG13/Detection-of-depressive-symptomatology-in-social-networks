@@ -194,6 +194,7 @@ We implemented the model through a pipeline that included feature scaling (witho
 #### 2.2.2.2. Random Forest
 Random Forest is a machine learning model based on decision trees. Instead of using just one tree, it builds many trees using random parts of the data and then combines their predictions. This makes the model more stable and helps reduce overfitting. It's also good at working with noisy or irrelevant features, and it can capture non-linear patterns in the data.
 Each tree decides how to split the data by checking which features reduce the classification error the most. At the end, the final prediction is made by majority vote across all trees. Another useful property is that Random Forest gives us feature importance scores, showing which variables were most helpful during training.
+
 In our case, we trained one model for each feature set, without applying any scaling (since Random Forest doesn’t need it). We used grid search to test different hyperparameter combinations:
 n_estimations: number of trees (100 and 200)
 max_depth: tree depth (None, 10, 20)
@@ -229,7 +230,9 @@ GloVe and Word2Vec achieved solid F1-scores (~0.85–0.88) and strong ROC AUC va
 
 ### Comparative Analysis
 Across all models, the TF-IDF + PLS configuration consistently emerged as the top performer, especially for Logistic Regression and SVM, with F1-scores near 0.98–0.99. This is likely due to TF-IDF’s ability to capture fine-grained lexical patterns in the posts, combined with PLS’s effectiveness in projecting features into a space that maximally correlates with the target labels. Since Reddit posts related to depression often include emotionally charged vocabulary, TF-IDF retains this discriminative detail better than other vectorizations.
+
 Word2Vec with Embedded selection, on the other hand, produced the best results for Random Forest. This makes sense given that Random Forest handles dense, non-linear feature spaces well, and Word2Vec captures semantic relationships between words that may not be reflected in simple term frequency. Feature selection here likely removed noise and retained the most meaningful semantic axes.
+
 GloVe also performed reasonably well across models but slightly under TF-IDF and Word2Vec. While it captures global co-occurrence information, its fixed nature (pre-trained) might miss Reddit-specific expressions or informal patterns relevant to the task.
 Finally, LDA was consistently the weakest vectorization, with lower F1-scores across all models. This is expected in binary classification tasks like this one, where topic distributions are often too coarse to separate nuanced emotional states. However, even LDA benefited from dimensionality reduction and selection, suggesting that while topic-level features are less informative alone, they still carry some class-discriminative signal when combined with the right model.
 
@@ -262,8 +265,22 @@ In this section we will perform an exhaustive and interactive analysis where the
 
 Once this selection has been made, two different visualizations of the comparison of the results will be printed. First, a dynamic bar chart, where we can easily and quickly visually identify the best parameter configuration. Finally, an interactive table where we can see in greater mathematical detail the results for the selected combinations.
 
-
 # Acknowledgment of authorship
+We, Jhonatan Barcos Gambaro (100548615) and Andrés Díaz Ruano (100472763), declare that the work done in this project has been designed, implemented, evaluated and described in this report by us. This includes each of the following sections:
+
+* The preprocessing pipeline for Reddit posts
+
+* The document vectorization strategies: TF-IDF, Word2Vec, GloVe, and LDA
+
+* The training, evaluation, and comparison of machine learning models using various feature selection techniques
+
+* The development of the interactive dashboard using Dash and Plotly
+
+To carry out the practice we used as a main reference the notebooks provided in the course Machine Learning Applications, whose authors are Vanessa Gómez Verdejo, Jerónimo Arenas-García, Lorena Calvo-Bartolomé, and Jesús Cid-Suero. We also referenced materials from the Natural Language Processing course, developed by Pablo Martínez Olmos and Ángel Navia Vázquez.
+
+In addition, we usedgenerative AI tools such as ChatGPT from OpenAI and Copilot in combination with Prompt Engineering techniques to maximize the usefulness and correctness of these tools. In the following section we propose a statement of generative AI usage on this project where we have reflected on the use of these new tools.
+
+## Statement of use of generative AI
 
 
 
