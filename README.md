@@ -84,7 +84,7 @@ workers=4
 sg=1 
 Thus, once we have trained the model, each document has been represented as the average of the vectors of its words, which is equivalent to the average of embeddings.
 
-Respecto al modelo GloVe, hemos utilizado unos embeddings preentrenados, exactamente los glove.6B.100d.txt, el cual hemos descargado a través de la página oficial de GloVe. Al igual que con Word2Vec, este modelo calcula el vector de cada documento como el promedio de los vectores de sus palabras.
+Concerning the GloVe model, we used pre-trained embeddings, specifically glove.6B.100d.txt, which we downloaded from the official GloVe website. As with Word2Vec, this model computes the vector for each document as the average of the vector of its words.
 
 In the following, we will explain in a theoretical-mathematical way how these models carry out the conversion from words to vectors in each of the documents. First of all, the input of these models is a tokenized text d = [t1, t2, t3, ..., tn] (detailed in previous points), while the embeddings model E(ti) = R^100. Thus we can define the representation of a document as:
 doc = 1/n SUM_i=1_n(E(ti))
