@@ -280,7 +280,7 @@ To carry out the practice we used as a main reference the notebooks provided in 
 
 In addition, we usedgenerative AI tools such as ChatGPT from OpenAI and Copilot in combination with Prompt Engineering techniques to maximize the usefulness and correctness of these tools. In the following section we propose a statement of generative AI usage on this project where we have reflected on the use of these new tools.
 
-## Statement of use of generative AI
+## Declaration of use of generative Artificial Intelligence
 
 
 
