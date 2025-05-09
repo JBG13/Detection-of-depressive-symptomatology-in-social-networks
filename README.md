@@ -102,12 +102,10 @@ To conclude this section, we have performed a 2 dimensions PCA analysis to check
 Through an in-depth analysis of the results, we observe that the Word2Vec model explains 17.35% of the variance of our vectorized data in the first principal component (PC1) and 8.38% in the second one (PC2). In contrast,  the GloVe model accounts for 14.77% with PC1 and 8.01% with PC2. Thus, the results suggest that the Word2Vec embedding captures a slightly higher amount of variance in the data, potentially offering a better separation between the document classes in a reduced 2-dimensional space. The better performance of Word2Vec may be attributed to its ability to capture local semantic context more effectively than GloVe, which is particularly relevant in task involving emotional expressions, such as depression detection in social media texts.
 
 ### 1.2.3. Extraction of themes and vector representation of the documents using the LDA algorithm
-Through an exhaustive analysis of the results, we observe how the Word2Vec model is able to explain 17.35% of PC1 and 8.28% of PC2, while the GloVe model is able to explain 14.77% and 8.01% of the variance of our vectorized data. Thus, the Word2Vec model is able to explain 14.77% and 8.01% of the variance of our vectorized data.
-
-
-To conclude this section we will describe the topic extraction and vector representation of the documents through the LDA algorithm, implemented with gensim. The main goal of this method is to model latent topics and extract common discourse patterns among the main topics of our corpus. To carry out such implementation we have limited the tokens according to their frequency, eliminating tokens with a very high or low relative frequency (in case they appear in less than 5 or more than 80% of documents). This ensures that all tokens provide relevant information to the model while improving its performance. A bag of words was then created through doc2bow from the dictionary.
+To conclude this section we will describe the topic extraction and vector representation of the documents through the LDA algorithm, implemented with gensim. The main goal of this method is to model latent topics and extract common discourse patterns among the main topics of our corpus. To carry out such implementation we have limited the tokens according to their frequency, eliminating tokens with a very high or low relative frequency (in case they appear in less than 5% or more than 80% of documents). This ensures that all tokens provide relevant information to the model while improving its performance. A bag of words was then created through doc2bow from the dictionary.
 
 In order to maximize the efficiency of this method we used an iterative technique to select the optimal number of topics for the LDA algorithm according to our project. For this purpose, we have trained LDA models with the following k parameters:
+
 * start = 5
 * limit = 30
 * step = 5
