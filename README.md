@@ -119,8 +119,121 @@ Below is an image with the list of the most relevant words of each topic as well
 
 ![topics_word_table_colored_header_big](https://github.com/user-attachments/assets/049ab3a4-77fb-4e18-8ba8-db070a2db74d)
 
-# 2. Machine Learning. Classification using feature extraction or selection techniques
 
+# 2. Machine Learning. Classification using feature extraction or selection techniques
+The goal for this task is to build a binary classification model capable of distinguishing between reddit users that show depression signs and those who do not, based on the content of their posts. The classification is based on the label variable, where:
+0 corresponds to users from non-depressive subreddits (`r/Teenagers`, `r/DeepThoughts`, `r/Happy`), representing the control group.
+1 corresponds to the users belonging to depressive subreddits (`r/Depression`, `r/SuicideWatch`).
+
+The primary objective is to explore how different text vectorizations, feature representations and selection techniques affect the classification performance. The summary of dimensions of each vectorization technique we tested:
+TF-IDF: it is sparse and high dimensional. We limited the vocabulary to the 5000 most relevant tokens.
+GloVe: dense 100-dimensional vector per document.
+Word2Vec:  dense 100-dimensional vector per document.
+LDA: dense 10-dimensional vector per document.
+
+## 2.1. Feature extraction and selection techniques
+To improve both the interpretability and performance of our classifiers we applied a variety of dimensional reduction techniques, covering both feature extraction and selection approaches. These techniques were systematically applied to all four types of document representations we explored in Task1: TF-IDF, Word2Vec, GloVe and LDA.
+
+### 2.1.1. Feature extraction 
+
+#### 2.1.1.1. Principal Component Analysis (PCA)
+To reduce dimensionality while preserving as much variance as possible we applied PCA to each text representation technique. PCA is an unsupervised technique that transforms the original features into a new set of orthogonal components ordered by the amount of variance they explain.
+Implementation details: 
+Sparse matrix handling: if the input is in sparse format (as in TF-IDF), it is first converted into a dense array.
+Standardization: we standardize the input features to ensure all variables contribute equally to the PCA and avoid the sensitive scaling of this algorithm.
+We set the maximum number of components to 10 (depending on the dimensionality), which means PCA will extract the 10 most significant components (the ones that explain the higher percentage of the variance).
+
+#### 2.1.1.2. Partial Least Squares (PLS) Regression
+PLS is a supervised feature extraction technique that projects both the predictors and the target variable into a new space by maximizing the covariance between them. It is especially useful for high-dimensional and collinear features.
+Implementation details:
+As in PCA, input vectors were converted to dense arrays if necessary.
+Standardization: both input and target are standardized to ensure stability.
+Target reshaping: The target variable is shaped into a 2-dimensional array
+We extract the 10 latent variables that better capture the relationship between features and target.
+
+The final result X_pls is a new representation of each document in a 10-dimensional space optimized to explain variation relevant to the classification task..	
+
+### 2.1.2. Feature selection
+In addition to feature extraction we applied several feature selection methods to identify the most informative features for each vectorization. These methods are grouped into three categories: filtering, wrapper and embedded.
+
+#### 2.1.2.1. Filtering - SelectKbest
+We used SelectKBest with the mutual information criterion to rank features by their dependency with the target variable. This method is able to capture both linear and nonlinear relationships.
+We select the top 100 features with the higher MI score (higher dependency).
+It works well with high-dimensional inputs, such as TF-IDF.
+The benefits of this approach are its simplicity, speed and that it is model-agnostic.
+
+#### 2.1.2.2. Wrapper – Recursive Feature Elimination (RFE)
+RFE is a greedy optimization technique that recursively removes the least important features based on the weights of a base model.
+We set logistic regression (linear) as the base model with a maximum of 500 iterations. 
+It keeps the top 100 features after iterative elimination.
+It improves relevance.
+
+#### 2.1.2.3. Embedded – L1-Regularized Logistic Regression and Random Forest
+Embedded methods perform feature selection within the model training itself. We have used two different approaches:
+
+L1-Regularized Logistic Regression (LASSO): It introduces a penalty term that forces the model to shrink some features' weight to zero. In this way it eliminates less relevant features while retaining those which are more useful for the prediction. After fitting the model we select the top 100 features with higher weights. This method is especially effective when dealing with high-dimensional data such as TF-IDF, improving generalization.
+Random Forest: On the other hand, we have used RF, an ensemble method based on decision trees that allows us to measure how important each feature is. It does this by checking how much each feature helps to split the data correctly across all the trees in the model. We ranked the features using the feature_importances_  attribute and selected the top 100 with the highest scores. This method doesn’t make strong assumptions about the data, can deal with complex (non-linear) patterns, and works well even when there is noise or useless features in the dataset.
+
+### 2.1.3. Generation of reduced feature sets
+For each type of vectorization (TF-IDF, Word2Vec, GloVe, LDA), we applied all the feature extraction and selection methods, using the same settings: up to 10 components for PCA and PLS, and up to 100 features for SelectKBest, RFE, and L1-based selection. We stored the results in a dictionary to keep everything organized and printed the shapes of each output to make sure the transformations worked correctly. As a result, we obtained 20 reduced feature sets in total (4 vectorizations × 5 methods), which were then used to train and evaluate our classification models.
+
+## 2.2. Classification pipeline and evaluation
+This section covers how the data was split, which models were used and how we measured their performance. Each model was trained using the different vectorizations and feature sets obtained  in the previous section to compare which combinations gave the best results.
+
+### 2.2.1. Data splitting and validation strategy
+To evaluate the performance of our models we split the dataset into 80% for training and 20% for testing. We used stratified sampling to make sure that both classes (depressed and non-depressed) were represented in similar proportions in both sets.
+During training, we applied 5-fold cross-validation to select the best hyperparameters and avoid overfitting. This method divides the training data into five parts: four are used to train the model, and one is used to validate it. This process is repeated five times so that every part is used for validation once. It helps us get a more reliable estimate of how well the model generalizes to new data.
+
+### 2.2.2. Models used
+We tested different classification models to see which ones worked best with our data. The idea was to combine simple and more complex models to understand how each one performs with the different types of features we created.
+
+#### 2.2.2.1. Logistic Regression
+We used Logistic Regression as a baseline model because it is simple, fast, and often performs well in text classification tasks. It is a linear classifier that models the probability that a sample belongs to the positive class using the sigmoid function applied to a weighted sum of the input features:
+P(y=1∣x)=1/(1+e^(-(w^T x+b)))
+The model is trained by minimizing the logistic loss (also called cross-entropy loss), which penalizes incorrect predictions. We also apply L2 regularization to the weights to prevent overfitting, especially in high-dimensional cases.
+We implemented the model through a pipeline that included feature scaling (without centering to support sparse matrices) followed by a LogisticRegression estimator using the liblinear solver. We tuned the regularization strength using a grid search over several values of C ([0.01, 0.1, 1, 10, 100]) for each combination of vectorization and dimensionality reduction methods.
+
+#### 2.2.2.2. Random Forest
+Random Forest is a machine learning model based on decision trees. Instead of using just one tree, it builds many trees using random parts of the data and then combines their predictions. This makes the model more stable and helps reduce overfitting. It's also good at working with noisy or irrelevant features, and it can capture non-linear patterns in the data.
+Each tree decides how to split the data by checking which features reduce the classification error the most. At the end, the final prediction is made by majority vote across all trees. Another useful property is that Random Forest gives us feature importance scores, showing which variables were most helpful during training.
+In our case, we trained one model for each feature set, without applying any scaling (since Random Forest doesn’t need it). We used grid search to test different hyperparameter combinations:
+n_estimations: number of trees (100 and 200)
+max_depth: tree depth (None, 10, 20)
+min_sample_split: minimum samples to split a node (2,5)
+Each model was trained using 5-fold cross-validation and later evaluated on a separate 20% test set for every vectorization and dimensionality reduction method.
+
+#### 2.2.2.3. Support Vector Machine (SVM)
+SVM is a linear classifier that tries to find the best hyperplane that separates the two classes by maximizing the margin between them. This margin is the distance between the hyperplane and the closest points from each class. A larger margin usually leads to better generalization of new data. SVM works well in high-dimensional spaces, which makes it suitable for text classification tasks.
+In our implementation, we used a linear kernel and added MinMax scaling to the features to improve convergence during training. Since SVM is sensitive to the scale of the input, scaling was essential, especially after applying dimensionality reduction.
+For feature sets obtained through selection methods, we noticed they were still too high-dimensional or noisy, so we applied PCA to reduce them to a maximum of 10 components before training the model.
+We tuned the regularization parameter C using grid search with the values [0.01, 0.1, 1, 10], and trained each model using 5-fold stratified cross-validation. Each configuration was then evaluated on a 20% test set.
+
+### 2.2.3. Evaluation metrics and results
+To evaluate the performance of our classification models, we used a set of standard metrics that give insight into different aspects of the predictions:
+Accuracy: the proportion of correctly predicted samples.
+Precision: how many of the predicted positives were actually corre
+Recall: how many of the actual positives were correctly identified.
+F1-score: the harmonic mean of precision and recall, especially useful in imbalanced datasets.
+ROC-AUC: measures the ability of the model to distinguish between classes across all thresholds.
+Confusion Matrix: a breakdown of true vs. predicted labels for both classes.
+
+#### Logistic Regression
+Logistic Regression achieved excellent results, especially when combined with the TF-IDF vectorization and strong feature engineering techniques. The best configuration, TF-IDF + PLS, reached an F1-score of 0.98 and a ROC AUC of 0.99, showing exceptional balance between precision and recall. Feature selection methods like KBest, RFE, and Embedded also performed consistently well, particularly with Word2Vec, which benefited from dense representations.
+Although GloVe achieved moderate performance (F1-scores ~0.87), LDA remained the weakest representation, with F1-scores around 0.77–0.79. Most optimal models selected C = 10.0 or 0.1, indicating that moderate regularization leads to better generalization.
+
+#### Random Forest
+Random Forest classifiers also performed strongly across all feature sets. Word2Vec + Embedded selection worked well, with an F1-score of 0.86 and ROC AUC of 0.91. Dense embeddings like Word2Vec and GloVe showed great compatibility with tree-based models, especially when feature selection was applied. TF-IDF remained a reliable option, with PLS and PCA achieving F1-scores >0.89.
+LDA showed slight disimprovement over its performance with Logistic Regression, with top scores around 0.71, showing that Random Forest can better handle topic-based representations. Most top configurations used 100–200 trees and max_depth between 10 and 20, confirming that moderately deep trees generalize well in this task.
+
+#### Support Vector Machine (SVM)
+Linear SVM models performed exceptionally well after dimensionality reduction. The best result came from TF-IDF + PLS, reaching an F1-score of 0.95, ROC AUC of 0.99, and very high precision (0.99) and recall (0.99). PCA also improved performance, particularly when applied after feature selection methods like KBest and RFE.
+GloVe and Word2Vec achieved solid F1-scores (~0.85–0.88) and strong ROC AUC values (~0.91–0.93), confirming good calibration even when linear SVMs are used. LDA again lagged behind, though it slightly underperformed its results from the other models (best F1 ≈ 0.66). All best models chose C = 10.0, suggesting that low regularization works best when data is well-normalized.
+
+### Comparative Analysis
+Across all models, the TF-IDF + PLS configuration consistently emerged as the top performer, especially for Logistic Regression and SVM, with F1-scores near 0.98–0.99. This is likely due to TF-IDF’s ability to capture fine-grained lexical patterns in the posts, combined with PLS’s effectiveness in projecting features into a space that maximally correlates with the target labels. Since Reddit posts related to depression often include emotionally charged vocabulary, TF-IDF retains this discriminative detail better than other vectorizations.
+Word2Vec with Embedded selection, on the other hand, produced the best results for Random Forest. This makes sense given that Random Forest handles dense, non-linear feature spaces well, and Word2Vec captures semantic relationships between words that may not be reflected in simple term frequency. Feature selection here likely removed noise and retained the most meaningful semantic axes.
+GloVe also performed reasonably well across models but slightly under TF-IDF and Word2Vec. While it captures global co-occurrence information, its fixed nature (pre-trained) might miss Reddit-specific expressions or informal patterns relevant to the task.
+Finally, LDA was consistently the weakest vectorization, with lower F1-scores across all models. This is expected in binary classification tasks like this one, where topic distributions are often too coarse to separate nuanced emotional states. However, even LDA benefited from dimensionality reduction and selection, suggesting that while topic-level features are less informative alone, they still carry some class-discriminative signal when combined with the right model.
 
 
 # 3. Dashboard for the Detection of Depressive Symptomatology in Social Networks
