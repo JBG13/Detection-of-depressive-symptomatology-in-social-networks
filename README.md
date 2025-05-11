@@ -278,7 +278,7 @@ We, Jhonatan Barcos Gambaro (100548615) and Andrés Díaz Ruano (100472763), dec
 
 To carry out the practice we used as a main reference the notebooks provided in the course Machine Learning Applications, whose authors are Vanessa Gómez Verdejo, Jerónimo Arenas-García, Lorena Calvo-Bartolomé, and Jesús Cid-Suero. We also referenced materials from the Natural Language Processing course, developed by Pablo Martínez Olmos and Ángel Navia Vázquez.
 
-In addition, we usedgenerative AI tools such as ChatGPT from OpenAI and Copilot in combination with Prompt Engineering techniques to maximize the usefulness and correctness of these tools. In the following section we propose a statement of generative AI usage on this project where we have reflected on the use of these new tools.
+In addition, we used generative AI tools such as ChatGPT from OpenAI and Copilot in combination with Prompt Engineering techniques to maximize the usefulness and correctness of these tools. In the following section we propose a statement of generative AI usage on this project where we have reflected on the use of these new tools.
 
 ## Declaration of use of generative Artificial Intelligence
 
