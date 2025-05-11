@@ -59,7 +59,7 @@ Then, the lemmatization of each token was performed, followed by a final filteri
 Once this preprocessing was done, each document was represented as a clean list of lemmatized tokens prepared for vectorization, which is detailed below.
 
 ## 1.2. Text Vectorization
-En el siguiente apartado describiremos todas las estrategias que hemos escogido e implementado en nuestro proyecto con el objetivo de representar los textos a través de vectores numéricos para su posterior utilización en el análisis de temas y tareas de clasificación.
+In the following section we will describe all the strategies we have chosen and implemented in our project with the aim of representing texts through numerical vectors for their subsequent use in topic analysis and classification tasks.
 
 
 ### 1.2.1. TF-IDF representation
