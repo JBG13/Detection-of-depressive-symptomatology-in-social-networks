@@ -282,6 +282,32 @@ In addition, we usedgenerative AI tools such as ChatGPT from OpenAI and Copilot 
 
 ## Declaration of use of generative Artificial Intelligence
 
+### For which aspects of the practice we have used AI
+* Definition and understanding of the objectives of our project: First of all, we have used generative AI to guarantee a correct and complete understanding of the objectives of the practice at a technical and mathematical level. Likewise, we have been able to establish the statement through practical examples to be able to develop the practice with total guarantees at the level of understanding.
+
+* Resolving doubts about the problems that arose during the development of the practice: As we were solving the proposed statement, different problems arose at code level as execution errors, which we easily solved through VSCode debugging with the help of generative AI to detect where in our code was the error in order to solve it.
+  
+* Complex code writing guided by the provided notebooks and prompt engineering techniques to adapt our base code with new modalities in order to simplify our initial implementation and improve the results based on the different evaluation methods used.
+Code review and validation of our model: Once our code was finalized, we performed an exhaustive analysis of it to verify that it was correct.
+
+### To what extent has it facilitated the realization of the practice 
+In general, access to these new tools in a responsible and coherent way has been a great advantage when carrying out the practice, especially in terms of time, since it has facilitated different aspects such as:
+
+* Quick understanding of complex concepts, for which, in the past, it would take us much more time to find the indicated information on the internet, interpret it and adapt it to our needs.
+  
+* Resolution of errors, for which, as in the previous point, in the past we could take a long time to detect and solve correctly.
+Obtaining explanations about python library methods that we do not know in depth in a much faster and more efficient way than consulting the library guide.
+
+* Verification of the content of the memory to verify that we did not leave anything relevant for the total understanding of our work developed in this practice.
+
+### How did you verify and adapt the information obtained
+As mentioned in the previous section, we consider the use of these new tools to be a great advantage over the past, as long as they are used responsibly and conscientiously. Therefore, we have used a cross-validation method to ensure that the information provided by the generative AI was correct and optimal. For this purpose, the following methodology was followed:
+
+* Checking on the validity of the answers through the Internet and resources provided in the referenced notebooks.
+  
+* Contrasting the theoretical explanations with the Internet and referenced notebooks, especially in the mathematical part since the generative AIs are not perfected in this area.
+
+* Use of AI as a support tool and not as a substitute for critical thinking to solve the different problems posed.
 
 
 
